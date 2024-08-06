@@ -10,7 +10,7 @@ const ProductList = ({products}: ProductListProps) => {
       {products.map((product) => (
         <div key={product.id} className="bg-white p-4 rounded-lg shadow">
           <h2 className="text-xl font-semibold">{product.name}</h2>
-          <p className="text-gray-600">{product.price}</p>
+          <p className="text-gray-600">${product.price}</p>
         </div>
       ))}
     </div>
