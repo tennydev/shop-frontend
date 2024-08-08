@@ -1,8 +1,8 @@
-import { ApiResponse, Category, Product } from "../types"
+import {Product } from "../types"
 
 const getAllProducts = async (): Promise<Product[] | null> => {
   try {
-    const response = await fetch('http://localhost:8080/products')
+    const response = await fetch('http://34.46.162.6/products')
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`)
@@ -17,9 +17,31 @@ const getAllProducts = async (): Promise<Product[] | null> => {
   }
 }
 
+const getProductById = async (productId: number): Promise<Product | null> => {
+  try {
+    const response = await fetch(`http://34.46.162.6/products/${productId}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'X-RVLT-userId': '1'
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`)
+    }
+
+    const res = await response.json();
+    return res.data;
+    
+  } catch (error: any) {
+    console.error("Failed to fetch product:", error);
+    return null;
+  }
+}
+
 const getProductsByCateogry = async (categoryId : Number): Promise<Product[] | null> => {
   try {
-    const response = await fetch(`http://localhost:8080/categories/${categoryId}`);
+    const response = await fetch(`http://34.46.162.6/categories/${categoryId}`);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`)
     }
@@ -33,7 +55,8 @@ const getProductsByCateogry = async (categoryId : Number): Promise<Product[] | n
 
 const productService = {
   getAllProducts, 
-  getProductsByCateogry
+  getProductsByCateogry,
+  getProductById
 };
 
 export default productService;

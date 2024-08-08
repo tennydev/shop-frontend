@@ -12,12 +12,24 @@ export interface Product {
   price: number;
 }
 
-export interface ApiResponse<T>{
-  status: {
-    httpStatusCode: string;
-    serverStatusCode: string;
-    message: string;
-  };
-  data: T
+export interface ProductInOrder {
+  id: number;
+  name: string;
+  count: number;
 }
 
+export interface OrderWithSessionProducts {
+  id: number;
+  status: string;
+  createdAt: string;
+  submittedAt: string | null;
+  totalAmount: number;
+  products: ProductInOrder[];
+}
+
+export interface User {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+}
